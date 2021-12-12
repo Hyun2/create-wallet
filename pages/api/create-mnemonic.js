@@ -5,7 +5,8 @@ export default function handler(req, res) {
 
   try {
     mnemonic = lightwallet.keystore.generateRandomSeed();
-    res.json({ mnemonic });
+
+    res.json({ mnemonic: mnemonic.split(" ") });
   } catch (e) {
     console.log(e);
   }

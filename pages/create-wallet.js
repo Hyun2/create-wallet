@@ -1,6 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Mnemonic from "../components/mnemonic";
+import styled from "@emotion/styled";
+
+const Wrapper = styled.div`
+  margin: 30px;
+`;
 
 const CreateMnemonic = () => {
   return <div></div>;
@@ -22,7 +28,7 @@ const CreateWallet = ({ mnemonic }) => {
       return;
     }
     const { data } = await axios.post("/api/create-keystore", {
-      mnemonic,
+      mnemonic: mnemonic.join(" "),
       password,
     });
 
@@ -37,22 +43,49 @@ const CreateWallet = ({ mnemonic }) => {
 
   return (
     <div>
-      <div>{mnemonic}</div>
-      <input
-        type="password"
-        value={password}
-        onChange={handleChange}
-        placeholder="패스워드"
-      />
+      <Mnemonic mnemonic={mnemonic} />
 
-      <button disabled={!password}>
-        <a onClick={handleClick}>Keystore 생성</a>
-      </button>
-      {clicked && (
-        <Link href="/connect-wallet">
-          <a>지갑 연결</a>
-        </Link>
-      )}
+      <Wrapper>
+        <div className=" relative " style={{ marginBottom: "20px" }}>
+          <input
+            type="password"
+            value={password}
+            onChange={handleChange}
+            className=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+            placeholder="패스워드"
+          />
+        </div>
+
+        {/* <button disabled={!password}>
+          <a onClick={handleClick}>Keystore 생성</a>
+        </button> */}
+
+        <button
+          style={{ marginBottom: "20px" }}
+          type="button"
+          disabled={!password}
+          className={`${
+            password ? "" : "cursor-not-allowed"
+          } py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg`}
+        >
+          <a onClick={handleClick}>Keystore 생성</a>
+        </button>
+
+        {clicked && (
+          // <Link href="/connect-wallet">
+          //   <a>지갑 연결</a>
+          // </Link>
+
+          <Link href="/connect-wallet">
+            <button
+              type="button"
+              className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+            >
+              <a>지갑 연결</a>
+            </button>
+          </Link>
+        )}
+      </Wrapper>
     </div>
   );
 };
