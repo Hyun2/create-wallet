@@ -8,10 +8,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^0.24.0",
+    "eth-lightwallet": "^4.0.0",
     "formidable": "^2.0.1",
+    "hooked-web3-provider": "^1.0.0",
     "next": "12.0.7",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "swr": "^1.1.1",
+    "web3": "^1.6.1"
   },
   "devDependencies": {
     "eslint": "8.4.1",
