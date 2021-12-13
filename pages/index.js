@@ -11,6 +11,15 @@ const Container = styled.div`
 export default function Home() {
   return (
     <Container>
+      <h2
+        style={{
+          textAlign: "center",
+          marginBottom: "30px",
+          fontSize: "1.5rem",
+        }}
+      >
+        니모닉 지갑 생성 데모
+      </h2>
       <Link href="/create-wallet">
         <button
           style={{ marginBottom: "50px" }}

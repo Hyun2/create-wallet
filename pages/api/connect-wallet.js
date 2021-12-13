@@ -22,7 +22,7 @@ const handler = async (req, res) => {
 
     let keystore = await lightwallet.keystore.deserialize(data);
     let address = await keystore.getAddresses();
-    let eth;
+    let balance;
 
     let web3 = new Web3(
       new HookedWeb3Provider({
@@ -34,10 +34,10 @@ const handler = async (req, res) => {
 
     await web3.eth.getBalance(address.toString(), async (err, data) => {
       if (err) console.log(err);
-      eth = data.toString();
+      balance = data.toString();
     });
 
-    return res.json({ address: address.toString() });
+    return res.json({ address: address.toString(), balance });
   });
 };
 

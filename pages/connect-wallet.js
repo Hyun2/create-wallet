@@ -30,6 +30,7 @@ const UploadKeystore = () => {
   const [keystore, setKeystore] = useState(null);
   const [createObjectURL, setCreateObjectURL] = useState(null);
   const [walletAddress, setWalletAddress] = useState(null);
+  const [walletBalance, setWalletBalance] = useState(null);
   const router = useRouter();
   // const { data, error, mutate } = useSWR("/api/users", fetcher);
 
@@ -52,26 +53,26 @@ const UploadKeystore = () => {
     const body = new FormData();
     body.append("file", keystore);
     const {
-      data: { address },
+      data: { address, balance },
     } = await axios.post("/api/connect-wallet", body);
 
     if (address) {
       setWalletAddress(address);
+    }
+    if (balance) {
+      setWalletBalance(balance);
     }
   };
 
   return (
     <Container>
       <Title>Keystore 파일 업로드</Title>
-
       <input type="file" onChange={uploadToClient} />
       {/* <button onClick={uploadToServer}>확인</button> */}
-
       {/* <input
         className="block w-full cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 dark:text-gray-400 focus:outline-none focus:border-transparent text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
         type="file"
       /> */}
-
       <button
         style={{ margin: "30px 0" }}
         type="button"
@@ -81,7 +82,15 @@ const UploadKeystore = () => {
         확인
       </button>
 
-      {walletAddress && <p>지갑 {walletAddress} 연결 성공!</p>}
+      {walletAddress && (
+        <p style={{ textAlign: "center" }}>
+          <span className="px-2 py-1  text-base rounded text-white  bg-purple-600 font-medium">
+            {walletAddress}
+          </span>
+          <div style={{ textAlign: "center" }}>Balance: {walletBalance}</div>
+          <div style={{ textAlign: "center" }}>지갑 연결 성공!</div>
+        </p>
+      )}
     </Container>
   );
 };
