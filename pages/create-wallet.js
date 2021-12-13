@@ -88,11 +88,12 @@ const CreateWallet = ({ mnemonic }) => {
 
 export default CreateWallet;
 
-export async function getServerSideProps(context) {
-  const mnemonicRes = await axios.get(`/api/create-mnemonic`);
-  const data = await mnemonicRes.json();
+export async function getStaticProps(context) {
+  const {
+    data: { mnemonic },
+  } = await axios.get(`/api/create-mnemonic`);
 
-  if (!data) {
+  if (!mnemonic) {
     return {
       notFound: true,
     };
@@ -101,6 +102,6 @@ export async function getServerSideProps(context) {
   // console.log(data);
 
   return {
-    props: { mnemonic: data.mnemonic }, // will be passed to the page component as props
+    props: { mnemonic }, // will be passed to the page component as props
   };
 }
