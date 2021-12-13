@@ -8,10 +8,6 @@ const Wrapper = styled.div`
   margin: 30px;
 `;
 
-const CreateMnemonic = () => {
-  return <div></div>;
-};
-
 const CreateWallet = ({ mnemonic }) => {
   // console.log(mnemonic);
   const [password, setPassword] = useState("");
