@@ -91,7 +91,7 @@ export default CreateWallet;
 export async function getServerSideProps(context) {
   const {
     data: { mnemonic },
-  } = await axios.get(`/api/create-mnemonic`);
+  } = await axios.get(`https://wallet-ashen.vercel.app/api/create-mnemonic`);
 
   if (!mnemonic) {
     return {
