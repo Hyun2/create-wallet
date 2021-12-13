@@ -88,7 +88,7 @@ const CreateWallet = ({ mnemonic }) => {
 
 export default CreateWallet;
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const {
     data: { mnemonic },
   } = await axios.get(`/api/create-mnemonic`);
